@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id               String         @id @default(cuid())
+  name             String
+  age              Int
+  tgName           String
+  tgId             String
+  networkingPoints Int @default(0)
+  countMeetings    Int @default(0)
+  city             String
+  rating           Int  @default(0)
+  meetings         UserMeeting[]  // Связь с UserMeeting
+}
+
+model Meeting {
+  id        String      @id @default(cuid())
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  title     String
+  date      DateTime
+  topics    Topic[]     @relation("MeetingTopics") // Многие ко многим с Topic
+  placeId   String
+  place     Place       @relation(fields: [placeId], references: [id]) // Один ко многим с Place
+  users     UserMeeting[] // Связь с UserMeeting
+}
+
+model Topic {
+  id        String      @id @default(cuid())
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  title     String
+  count     Int
+  meetings  Meeting[]   @relation("MeetingTopics") // Многие ко многим с Meeting
+}
+
+model Place {
+  id        String      @id @default(cuid())
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  name      String
+  address   String
+  count     Int
+  meetings  Meeting[]   // Один ко многим с Meeting
+}
+
+model UserMeeting {
+  userId    String
+  meetingId String
+  user      User     @relation(fields: [userId], references: [id]) // Связь с User
+  meeting   Meeting  @relation(fields: [meetingId], references: [id]) // Связь с Meeting
+
+  @@id([userId, meetingId]) // Составной первичный ключ
+}

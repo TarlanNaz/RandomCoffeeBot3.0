@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "networkingPoints" SET DEFAULT 0,
+ALTER COLUMN "countMeetings" SET DEFAULT 0,
+ALTER COLUMN "rating" SET DEFAULT 0;
