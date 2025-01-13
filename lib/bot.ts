@@ -1,6 +1,7 @@
 import { Bot } from "https://deno.land/x/grammy@v1.32.0/mod.ts";  
-import { PrismaClient } from './generated/client/deno/edge.ts';
-const prisma = new PrismaClient();
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
 
 
 // Создайте экземпляр класса `Bot` и передайте ему токен вашего бота.  
