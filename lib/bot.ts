@@ -1,4 +1,4 @@
-import { Bot } from "https://deno.land/x/grammy@v1.32.0/mod.ts";  
+import { Bot,Context } from "https://deno.land/x/grammy@v1.32.0/mod.ts";  
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
@@ -24,9 +24,9 @@ model User {
 }
  */
 
-async function createAge(ctx: any) {
+async function createAge(ctx: Context) {
     ctx.reply("Сколько вам лет?"); 
-    const age = ctx.message.text
+    const age = Number(ctx.message!.text)
     if (age > 0) {
         return age;
     }
@@ -36,23 +36,23 @@ async function createAge(ctx: any) {
     }
 }
 
-async function createCity(ctx: any) {
+async function createCity(ctx: Context) {
     ctx.reply("В каком городе вы живёте?"); 
-    const city = ctx.message.text
+    const city = ctx.message!.text
     return city;
 }
 
 
-async function createName(ctx: any) {
+async function createName(ctx: Context) {
     ctx.reply("Как вас зовут?"); 
-    const name = ctx.message.text
+    const name = ctx.message!.text
     return name;
 }
 
 
 
 
-async function register(userId,tgName,name,age,city) {
+async function register(userId : string ,tgName: string ,name: string ,age: number,city: string) {
     await prisma.user.create({
       data: {
         tgId: userId,
@@ -101,13 +101,13 @@ async function register(userId,tgName,name,age,city) {
   });  
 
 bot.command("register", (ctx) => {  
-    const userId = ctx.from.id;
-    const TgName = ctx.from.username  
+    const userId = ctx.from!.id.toString()
+    const TgName = ctx.from!.username!.toString()  
 
     // Обработка регистрации
-    const name = createName(ctx);
-    const age =  createAge(ctx);   
-    const city =  createCity(ctx);  
+    const name = createName(ctx).toString();
+    const age =  Number(createAge(ctx));   
+    const city =  createCity(ctx).toString();  
 
     register(userId,TgName,name,age,city)
     .then(async () => {
