@@ -1,5 +1,5 @@
 import { Bot,Context } from "https://deno.land/x/grammy@v1.32.0/mod.ts";  
-import { PrismaClient } from "https://deno.land/x/prisma@v2.0.0-beta.1/mod.ts";
+import { PrismaClient } from "./generated/client/mod.ts";
 
 const prisma = new PrismaClient()
 
