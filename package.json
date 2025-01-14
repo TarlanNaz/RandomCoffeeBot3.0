@@ -29,6 +29,7 @@
   "dependencies": {
     "@prisma/client": "^6.2.1",
     "and": "^0.0.3",
+    "esm": "^3.2.25",
     "prisma-client": "^0.0.0"
   }
 }

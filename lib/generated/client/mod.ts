@@ -1,2 +1,1 @@
-// lib/generated/client/mod.ts
-export { PrismaClient } from "./index.js";
+export { PrismaClient } from "./index.mjs";
