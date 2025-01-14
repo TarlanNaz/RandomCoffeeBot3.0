@@ -93,5 +93,8 @@
     "./*": "./*"
   },
   "version": "6.2.1",
-  "sideEffects": false
+  "sideEffects": false,
+  "devDependencies": {
+    "@types/node": "^22.10.6"
+  }
 }

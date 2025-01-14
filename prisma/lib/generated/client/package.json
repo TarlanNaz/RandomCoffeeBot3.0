@@ -93,5 +93,8 @@
     "./*": "./*"
   },
   "version": "6.2.1",
-  "sideEffects": false
+  "sideEffects": false,
+  "dependencies": {
+    "esm": "^3.2.25"
+  }
 }

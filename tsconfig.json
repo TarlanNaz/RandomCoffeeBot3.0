@@ -107,6 +107,9 @@
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true ,
-    "types": ["node"]                                /* Skip type checking all .d.ts files. */
+    "types": ["node"],
+    "module": "es2020",  // или "es2022", "esnext", "node16", "nodenext"
+    "target": "es2020",  // или более новая версия
+    "moduleResolution": "node16"  // или "nodenext"                                /* Skip type checking all .d.ts files. */
   }
 }
